@@ -65,7 +65,7 @@ A planting plan will associate one or more plant types with a given bed. Each en
     - deduct one for each plant that is not planted in its preferred soil type
     - any bed with an error automatically returns 0
 6. Create a file `security.md`, with some **brief** suggestions for future engineers on securing the use of the application
-7. Create a file `todo.md` listing anything you would like to improve or do differently, but didn't have the time to do in this exercise. Please also include some hints for future engineers on the challenges of adding seasonality to the data model (i.e. for each plant type, some idea of when in the year it should be planted and when harvested).
+7. Create a file `todo.md` listing anything you would like to improve or do differently, but didn't have the time to do in this exercise. Please also include some brief hints for future engineers on the challenges of adding seasonality to the data model (i.e. for each plant type, some idea of when in the year it should be planted and when harvested).
 
 ## Not required
 
