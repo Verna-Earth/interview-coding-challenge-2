@@ -78,6 +78,8 @@ We're using Elixir and Phoenix as the core of our stack at Verna, so that's an o
 
 Your solution should include instructions on how to build, launch and test your version of the app.
 
+We can't check if you use AI tools like Copilot to complete this challenge, but please don't. That's not the way that we work. And we will want to discuss your design choices with you!
+
 Once you have completed the exercise, please either create a PR against the repo, or send your hiring manager a `zip` or `tar` archive of your project.
 
 Good luck! 
