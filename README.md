@@ -20,16 +20,16 @@ In our simplified model, a garden consists of one or more beds, and each bed can
 It's important that the app can be updated with additional plant data over time. A JSON file of background knowledge about plants will be given, which will tell the app for each type of vegetable:
 
 - the plant name
-- the soil type it prefers
-- zero or more "companion" plants that it likes to be planted alongside
+- a non-empty list of the soil types it prefers
+- a possibly-empty list of "companion" plants that it benefits from being planted alongside
 
 For example:
 
 ```json
 [
   {"name": "carrot",
-   "soil-type": "sandy",
-   "companions": ["leek"]
+   "soil_type": ["sandy"],
+   "benefits_from": ["leek"]
   }
 ]
 ```
@@ -60,7 +60,7 @@ A planting plan will associate one or more plant types with a given bed. Each en
 4. Create an endpoint for storing a planting plan. The planting plan will consist of a CSV file, one line per plant type. The return value should be either acknowledge the created plan, or an error if the planting plan cannot be processed.
 5. Create an endpoint to get a score for a plan, given a plan identifier. The score is an average of the scores for each bed in the plan. A single bed’s score is calculated by:
     - the base score is 10
-    - add one for each plant that is planted alongside a companion
+    - add one for each plant that is planted alongside a beneficial companion
     - add one if the bed is fully planted (i.e. the area of the bed equals the summed areas of the planted vegetables)
     - deduct one for each plant that is not planted in its preferred soil type
     - any bed with an error automatically returns 0
@@ -82,6 +82,5 @@ We can't check if you use AI tools like Copilot to complete this challenge, but 
 
 Once you have completed the exercise, please either create a PR against the repo, or send your hiring manager a `zip` or `tar` archive of your project.
 
-Good luck! 
+Good luck!
 🥦 🥕 🧄
-
