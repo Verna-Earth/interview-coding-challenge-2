@@ -1,6 +1,6 @@
 # Verna back-end coding challenge
 
-This take-home coding challenge is designed for you to demonstrate your back-end coding skills. By "back-end", we're looking at:
+This repo is the basis for one of the coding exercises for applicants to engineering job vacancies at [Verna]. This exercise emphasises back-end coding. By "back-end", we're looking at:
 
 - problem analysis
 - data modelling
@@ -73,7 +73,7 @@ A planting plan will associate one or more plant types with a given bed. Each en
 
 ## Example data
 
-There's some [example data](./example-data/) to help you get started. It's **OK to change or extend the example data files** if you want to.
+There's some [example data] to help you get started. It's **OK to change or extend the example data files** if you want to.
 
 ## Implementation technology
 
@@ -81,9 +81,20 @@ We're using Elixir and Phoenix as the core of our stack at Verna, so that is the
 
 Your solution should include instructions on how to build, launch and test your version of the app.
 
-We can't check if you use AI tools like Copilot to complete this challenge, but please don't. That's not the way that we work. And we will want to discuss your design choices with you!
+## How we'll evaluate your solution
+
+The key goal for this exercise is for you to show us how you think about, design, write and test code. There are a lot of moving pieces to this challenge. It's OK to do less of it in the time available, and focus on showing your best work. In fact, we'd prefer that you do some of it really well, than complete all of it but in rush and by cutting corners. Think about what skills you want to be able to demonstrate. As to what to leave out and what to include, that's up to you.
+
+In terms of evaluation, we want you to show how you can create clean, clear implementations that would allow you and your colleagues to develop, ship and maintain effective, usable features over the long term.
+
+## And lastly
+
+We can't check if you use AI tools like Copilot or GPT to complete this challenge, but please don't. That's not the way that we work at Verna. And we will want to discuss your design choices with you!
 
 Once you have completed the exercise, please either create a PR against the repo, or send your hiring manager a `zip` or `tar` archive of your project.
 
 Good luck!
 🥦 🥕 🧄
+
+[example data]: ./example-data/
+[Verna]: https://verna.earth
