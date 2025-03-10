@@ -87,7 +87,7 @@ The key goal for this exercise is for you to show us how you think about, design
 
 In terms of evaluation, we want you to show how you can create clean, clear implementations that would allow you and your colleagues to develop, ship and maintain effective, usable features over the long term.
 
-## And lastly
+## And lastly ...
 
 We can't check if you use AI tools like Copilot or GPT to complete this challenge, but please don't. That's not the way that we work at Verna. And we will want to discuss your design choices with you!
 
