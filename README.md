@@ -9,15 +9,51 @@ This repo is the basis for one of the coding exercises for applicants to enginee
 
 The goal of this exercise is to give us an idea of your coding style, and something to discuss during the technical part of the interview. We'd hope for this exercise to take something in the region of three or four hours. We won't be checking, but please - don't spend your entire weekend on this challenge. It's not necessary to meet the goals of the interview process, and, frankly, you've got much more interesting things to do in your free time! It's fine to submit an incomplete solution with notes on what you would do with more time.
 
+## Instructions
+
+First agree a submission deadline with your hiring manager. This is intended to allow you time to fit in working on the challenge around your current work and home responsibilities.
+
+If you are a GitHub user:
+
+1. `git clone` this repo.
+2. Write a small but functionally-complete app that meets the brief, below. Make as many commits as you normally would do.
+3. Include a document to explain how the reviewer can run your app.
+4. Create a pull-request to merge your solution back to `main`.Or, alternatively, send a link to the GitHub repo containing your solution.
+
+If you're not a GitHub user, or your GitHub account is private:
+
+1. Your hiring manager will send you a `.zip` or `.tar` file containing   this exercise.
+2. Write a small but functionally-complete app that meets the brief, below. Make as many commits as you normally would do.
+3. Include a document to explain how the reviewer can run your app.
+4. Zip or tar your solution, and email it to your hiring manager.
+
 ## The brief
 
 We want to help people to make use of food growing spaces effectively, for resilience and to increase biodiversity. So we have decided to create a product to help people plan a vegetable garden. The MVP of the product will allow users to submit a planting plan, and get some analysis back on the suitability of the design.
 
 In our simplified model, a garden consists of one or more beds, and each bed can be planted with one or more vegetable plants. In the MVP, we're not going to worry about the time that plants are sown or harvested, though that will likely be a feature we would want to add in future.
 
+An example garden:
+
+```text
+     bed (loam, 3m x 2m)
+     +--------------------+
+     | carrot 1m²         |
+     | pea 2m²            |
+     | sweetcorn 2m²      |                 bed (sandy, 1.5m x 2m)
+     |                    |                 +---------------+
+     |                    |                 | potato 2.5m²  |
+     +--------------------+                 | spinach 0.5m² |
+                                            |               |
+                                            |               |
+                                            |               |
+                                            |               |
+                                            +---------------+
+```
+
 ### Background knowledge
 
-It's important that the app can be updated with additional plant data over time. A JSON file of background knowledge about plants will be given, which will tell the app for each type of vegetable:
+It's important that the app doesn't assume a fixed model of plants and soils, etc, as this may change one day. Assume that a JSON file of background knowledge about plants will be given, which will tell the app for each type of vegetable:
 
 - the plant name
 - a non-empty list of the soil types it prefers
@@ -46,18 +82,18 @@ Once added to the application, a bed will be known by some identifier.
 
 ### Planting plan
 
-A planting plan will associate one or more plant types with a given bed. Each entry in the incoming planting plan will list:
+A planting plan will associate one or more plant types with a given bed. Each entry in the incoming planting plan will identify:
 
 - the bed
 - the plant name
-- the area to be planted in metres-squared
+- the area to be planted in metres²
 
 ## The tasks
 
 1. Create a data model for the application in a relational database such as PostgreSQL. It is up to you whether to create migration files, or manually create the database (as long as you give instructions, including SQL commands, for us to recreate your database layout)
 2. Import the background-knowledge JSON file. You can choose whether to keep the background knowledge in memory, or store it in the database.
-3. Provide an API endpoint for creating a new garden, by accepting a collection of vegetable bed descriptions. The bed descriptions will be lines of a CSV, one line per bed. The return value should either acknowledge the created beds, or an error if the bed descriptions cannot be processed.
-4. Provide an API endpoint for storing a planting plan. The planting plan will consist of a CSV file, one line per plant type. The return value should be either acknowledge the created plan, or an error if the planting plan cannot be processed.
+3. Provide an API endpoint for creating a new garden layout, by accepting a collection of vegetable bed descriptions. The bed descriptions will be in a JSON format, which it will be your responsibility to design. The return value should either acknowledge the created beds, or an error if the bed descriptions cannot be processed.
+4. Provide an API endpoint for storing a planting plan. The planting plan will consist of a JSON file. It will be your responsibility to specify the schema. The return value should be either acknowledge the created plan, or an error if the planting plan cannot be processed.
 5. Provide an API endpoint to get a score for a plan, given a plan identifier. The score is an average of the scores for each bed in the plan. A single bed’s score is calculated by:
     - the base score is 10
     - add one for each plant that is planted alongside a beneficial companion
@@ -73,7 +109,7 @@ A planting plan will associate one or more plant types with a given bed. Each en
 
 ## Example data
 
-There's some [example data] to help you get started. It's **OK to change or extend the example data files** if you want to.
+There's some [example data] to help you get started. It's **OK to change or extend the example data files** if you want to, for example to translate them to a JSON schema of your design.
 
 ## Implementation technology
 

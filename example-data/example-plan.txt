@@ -1,0 +1,10 @@
+plan
+  bed
+    id: <your decision>
+    plant_type: spinach
+    area: 0.5
+
+  bed
+    id: <your decision>
+    plant_type: tomato
+    area: 0.3

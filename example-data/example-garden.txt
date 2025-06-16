@@ -1,0 +1,11 @@
+bed
+  id: <your decision>
+  soil_type: chalk
+  origin: 0, 0
+  size: 2.5 x 1.8
+
+bed
+  id: <your decision>
+  soil_type: loam
+  origin: 2.5, 3
+  size: 3.0 x 3.0
