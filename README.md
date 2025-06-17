@@ -93,7 +93,7 @@ A planting plan will associate one or more plant types with a given bed. Each en
 1. Create a data model for the application in a relational database such as PostgreSQL. It is up to you whether to create migration files, or manually create the database (as long as you give instructions, including SQL commands, for us to recreate your database layout)
 2. Import the background-knowledge JSON file. You can choose whether to keep the background knowledge in memory, or store it in the database.
 3. Provide an API endpoint for creating a new garden layout, by accepting a collection of vegetable bed descriptions. The bed descriptions will be in a JSON format, which it will be your responsibility to design. The return value should either acknowledge the created beds, or an error if the bed descriptions cannot be processed.
-4. Provide an API endpoint for storing a planting plan. The planting plan will consist of a JSON file. It will be your responsibility to specify the schema. The return value should be either acknowledge the created plan, or an error if the planting plan cannot be processed.
+4. Provide an API endpoint for creating a planting plan. The planting plan will be in a JSON format, it will be your responsibility to specify the schema. The return value should either acknowledge the created plan, or an error if the planting plan cannot be processed.
 5. Provide an API endpoint to get a score for a plan, given a plan identifier. The score is an average of the scores for each bed in the plan. A single bed’s score is calculated by:
     - the base score is 10
     - add one for each plant that is planted alongside a beneficial companion
