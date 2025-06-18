@@ -1,43 +1,51 @@
 defmodule VernaWeb.GardenController do
   use VernaWeb, :controller
 
+  alias Ecto.Multi
   alias Verna.Planting
   alias Verna.Planting.Garden
 
   action_fallback VernaWeb.FallbackController
 
-  def index(conn, _params) do
-    gardens = Planting.list_gardens()
-    render(conn, :index, gardens: gardens)
-  end
 
-  def create(conn, %{"garden" => garden_params}) do
-    with {:ok, %Garden{} = garden} <- Planting.create_garden(garden_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/gardens/#{garden}")
-      |> render(:show, garden: garden)
-    end
-  end
+  def create(conn, %{"_json" => bed_list}) do
+    # TODO: validate schema
 
-  def show(conn, %{"id" => id}) do
-    garden = Planting.get_garden!(id)
-    render(conn, :show, garden: garden)
-  end
+    result =
+      Multi.new()
+      |> Multi.run(:garden, fn _repo, _ ->
+        # First we create the garden
+        case Planting.create_garden(%{}) do
+          nil -> {:error, :garden_not_created}
+          garden -> garden
+        end
+      end)
+      |> Multi.insert_all(:beds, Planting.Bed, fn %{garden: garden} ->
+        # Now we insert all the beds
+        bed_list
+        |> Enum.map(fn bed ->
+          %{
+            length: bed["length"],
+            width: bed["width"],
+            y: bed["y"],
+            x: bed["x"],
+            soil_type: bed["soil_type"],
+            garden_id: garden.id,
+            inserted_at: DateTime.utc_now(:second),
+            updated_at: DateTime.utc_now(:second)
+          }
+        end)
+      end)
+      |> Verna.Repo.transaction()
 
-  def update(conn, %{"id" => id, "garden" => garden_params}) do
-    garden = Planting.get_garden!(id)
+    case result do
+      {:ok, actual_result} ->
+        conn
+        |> put_status(:created)
+        |> render(:show, garden: actual_result.garden)
 
-    with {:ok, %Garden{} = garden} <- Planting.update_garden(garden, garden_params) do
-      render(conn, :show, garden: garden)
-    end
-  end
-
-  def delete(conn, %{"id" => id}) do
-    garden = Planting.get_garden!(id)
-
-    with {:ok, %Garden{}} <- Planting.delete_garden(garden) do
-      send_resp(conn, :no_content, "")
+      {:error, reason} ->
+        raise reason
     end
   end
 end

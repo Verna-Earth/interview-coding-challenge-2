@@ -20,6 +20,12 @@ defmodule VernaWeb.Router do
     get "/", PageController, :home
   end
 
+  scope "/api", VernaWeb do
+    pipe_through :api
+
+    post "/gardens/create", GardenController, :create
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", VernaWeb do
   #   pipe_through :api
