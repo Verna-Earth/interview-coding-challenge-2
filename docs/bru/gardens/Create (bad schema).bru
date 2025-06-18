@@ -1,7 +1,7 @@
 meta {
-  name: Create (success)
+  name: Create (bad schema)
   type: http
-  seq: 1
+  seq: 3
 }
 
 post {
@@ -14,17 +14,17 @@ body:json {
   {
     "beds": [
       {
-        "x": 0,
-        "y": 0,
+        "x": 100,
+        "y": 100,
         "width": 250,
-        "length": 180,
+        "not-a-field-length": 180,
         "soil_type": "chalk"
       },
       {
         "x": 250,
         "y": 300,
         "width": 300,
-        "length": 300,
+        "not-a-field-length": 300,
         "soil_type": "loam"
       }
     ]

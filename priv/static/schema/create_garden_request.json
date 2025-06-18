@@ -23,7 +23,7 @@
             "type": "integer"
           },
           "soil_type": {
-            "type": "integer"
+            "type": "string"
           }
         },
         "required": [

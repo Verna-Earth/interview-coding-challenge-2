@@ -21,4 +21,19 @@ defmodule VernaWeb.FallbackController do
     |> put_view(html: VernaWeb.ErrorHTML, json: VernaWeb.ErrorJSON)
     |> render(:"404")
   end
+
+  # A clause for schema validation errors
+  def call(conn, {:validation_error, errors}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> put_view(json: VernaWeb.ValidationJSON)
+    |> render(:error, validation_errors: errors)
+  end
+
+  def call(conn, {:collision_error, _}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> put_view(json: VernaWeb.ErrorJSON)
+    |> render(:"500-detail", %{errors: "Overlap error"})
+  end
 end
