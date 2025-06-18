@@ -11,7 +11,7 @@ mix phx.server
 
 Now go to http://localhost:4000/ and click the button to create the database and run migrations.
 
-The /docs folder has examples on how to run the api commands.
+The /docs folder has examples on how to run the api commands; with bruno in the `/docs/bru` folder and using curl with `docs/curl.md`
 
 # Pre-start thoughts
 - We will likely need to be easily able to extend the list of plants
@@ -48,10 +48,16 @@ Pipeline of composable functions seems like the best way to implement this while
 - Telemetry
 - Logging
 - API docs
+  - We have bruno and I'm adding curl but what about other stuff?
 - Docs on how to extend the scoring functionality
+  - Basically add a function def and then add that function to the composition pipeline
 - Use the knowledge schema to validate the knowledge being imported
-- More tests, where?
+- More tests
+  - More scoring combinations
+  - Fail states for scoring
+  - Error handling for scoring
 - More errors handled with beds, extreme integer values cause a Postgrex exception which isn't caught
 - Handle collisions correctly
+  - I'm confident I have the gist of it but I have made a logical error somewhere, I'm sure I've even written code to handle this problem before but couldn't recall where to paste it in (it'd be MIT licensed)
 - Better identifiers for beds, choice driven by customer requirements rather than dev preference where possible?
 - Unique plan names?
