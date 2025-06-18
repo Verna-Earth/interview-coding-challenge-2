@@ -4,8 +4,9 @@
 # Instructions on running the project
 ```sh
 cd verna
-mix deps.get
-iex -S mix phx.server
+mix deps.get && mix deps.compile
+mix ecto.create && mix ecto.migrate
+mix phx.server
 ```
 
 Now go to http://localhost:4000/ and click the button to create the database and run migrations.
