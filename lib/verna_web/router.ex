@@ -25,6 +25,7 @@ defmodule VernaWeb.Router do
 
     post "/gardens/create", GardenController, :create
     post "/plans/create", PlanController, :create
+    get "/plans/score/:name", PlanController, :score
   end
 
   # Other scopes may use custom stacks.

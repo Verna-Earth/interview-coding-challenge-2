@@ -15,6 +15,12 @@ defmodule VernaWeb.PlanJSON do
     %{data: data(plan)}
   end
 
+  def score(%{score: score_value}) do
+    %{
+      score: score_value
+    }
+  end
+
   defp data(%Plan{} = plan) do
     %{
       id: plan.id,

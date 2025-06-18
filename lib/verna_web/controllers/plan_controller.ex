@@ -7,7 +7,18 @@ defmodule VernaWeb.PlanController do
 
   action_fallback VernaWeb.FallbackController
 
+  def score(conn, %{"name" => name}) do
+    plan = Planting.get_plan_by_name!(name)
+    garden = Planting.get_garden_and_beds!(plan.garden_id)
+
+    score_context = Plan.score_plan(plan, garden)
+
+    render(conn, :score, score: score_context.score)
+  end
+
   def create(conn, plan_data) do
+    # TODO: ensure the area is less than the area of the bed
+
     with :ok <- validate_schema(plan_data),
          {:ok, plan} <- do_create(plan_data) do
       conn
@@ -29,10 +40,4 @@ defmodule VernaWeb.PlanController do
     |> Map.put("beds", %{"beds" => data["beds"]})
     |> Planting.create_plan()
   end
-
-  # We'll be wanting to get the score for this later
-  # def score(conn, %{"id" => id}) do
-  #   plan = Planting.get_plan!(id)
-  #   render(conn, :show, plan: plan)
-  # end
 end

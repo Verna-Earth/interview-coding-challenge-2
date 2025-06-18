@@ -37,6 +37,16 @@ defmodule Verna.Planting do
   """
   def get_garden!(id), do: Repo.get!(Garden, id)
 
+  def get_garden_and_beds!(id) do
+    query =
+      from gardens in Garden,
+        where: gardens.id == ^id,
+        left_join: beds in assoc(gardens, :beds),
+        preload: [beds: beds]
+
+    Repo.one!(query)
+  end
+
   @doc """
   Creates a garden.
 
@@ -228,6 +238,15 @@ defmodule Verna.Planting do
 
   """
   def get_plan!(id), do: Repo.get!(Plan, id)
+
+  def get_plan_by_name!(name) do
+    query =
+      from p in Plan,
+        where: p.name == ^name,
+        limit: 1
+
+    Repo.one!(query)
+  end
 
   @doc """
   Creates a plan.

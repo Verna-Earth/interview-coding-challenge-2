@@ -3,6 +3,8 @@ defmodule Verna.Planting.Garden do
   import Ecto.Changeset
 
   schema "gardens" do
+    has_many :beds, Verna.Planting.Bed
+
     timestamps(type: :utc_datetime)
   end
 
