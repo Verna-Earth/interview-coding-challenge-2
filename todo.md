@@ -50,3 +50,4 @@ Pipeline of composable functions seems like the best way to implement this while
 - Logging
 - API docs
 - Docs on how to extend the scoring functionality
+- Use the knowledge schema to validate the knowledge being imported

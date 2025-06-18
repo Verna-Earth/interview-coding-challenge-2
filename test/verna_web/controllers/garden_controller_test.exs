@@ -5,12 +5,8 @@ defmodule VernaWeb.GardenControllerTest do
 
   alias Verna.Planting.Garden
 
-  @create_attrs %{
-
-  }
-  @update_attrs %{
-
-  }
+  @create_attrs %{}
+  @update_attrs %{}
   @invalid_attrs %{}
 
   setup %{conn: conn} do

@@ -3,7 +3,6 @@ defmodule Verna.Repo.Migrations.CreateGardens do
 
   def change do
     create table(:gardens) do
-
       timestamps(type: :utc_datetime)
     end
   end

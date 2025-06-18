@@ -10,9 +10,7 @@ defmodule Verna.PlantingFixtures do
   def garden_fixture(attrs \\ %{}) do
     {:ok, garden} =
       attrs
-      |> Enum.into(%{
-
-      })
+      |> Enum.into(%{})
       |> Verna.Planting.create_garden()
 
     garden

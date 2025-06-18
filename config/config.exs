@@ -9,7 +9,9 @@ import Config
 
 config :verna,
   ecto_repos: [Verna.Repo],
-  generators: [timestamp_type: :utc_datetime]
+  generators: [timestamp_type: :utc_datetime],
+  json_schema_path: "priv/static/schema",
+  knowledge_path: "priv/static/example-data/background-knowledge.json"
 
 # Configures the endpoint
 config :verna, VernaWeb.Endpoint,

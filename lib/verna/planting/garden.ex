@@ -3,8 +3,6 @@ defmodule Verna.Planting.Garden do
   import Ecto.Changeset
 
   schema "gardens" do
-
-
     timestamps(type: :utc_datetime)
   end
 

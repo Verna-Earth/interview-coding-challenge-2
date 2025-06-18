@@ -73,7 +73,14 @@ defmodule Verna.PlantingTest do
     end
 
     test "create_bed/1 with valid data creates a bed" do
-      valid_attrs = %{length: 42, width: 42, y: 42, x: 42, soil_type: "some soil_type", garden_id: 42}
+      valid_attrs = %{
+        length: 42,
+        width: 42,
+        y: 42,
+        x: 42,
+        soil_type: "some soil_type",
+        garden_id: 42
+      }
 
       assert {:ok, %Bed{} = bed} = Planting.create_bed(valid_attrs)
       assert bed.length == 42
@@ -90,7 +97,15 @@ defmodule Verna.PlantingTest do
 
     test "update_bed/2 with valid data updates the bed" do
       bed = bed_fixture()
-      update_attrs = %{length: 43, width: 43, y: 43, x: 43, soil_type: "some updated soil_type", garden_id: 43}
+
+      update_attrs = %{
+        length: 43,
+        width: 43,
+        y: 43,
+        x: 43,
+        soil_type: "some updated soil_type",
+        garden_id: 43
+      }
 
       assert {:ok, %Bed{} = bed} = Planting.update_bed(bed, update_attrs)
       assert bed.length == 43

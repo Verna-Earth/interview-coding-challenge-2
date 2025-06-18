@@ -17,13 +17,22 @@ defmodule Verna.Application do
       # Start a worker by calling: Verna.Worker.start_link(arg)
       # {Verna.Worker, arg},
       # Start to serve requests, typically the last entry
-      VernaWeb.Endpoint
+      VernaWeb.Endpoint,
+      Verna.Caches.KnowledgeCache
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Verna.Supervisor]
-    Supervisor.start_link(children, opts)
+    start_result = Supervisor.start_link(children, opts)
+
+    startup()
+
+    start_result
+  end
+
+  defp startup() do
+    Verna.Knowledge.load_background_knowledge()
   end
 
   # Tell Phoenix to update the endpoint configuration
