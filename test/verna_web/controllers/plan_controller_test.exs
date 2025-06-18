@@ -3,90 +3,77 @@ defmodule VernaWeb.PlanControllerTest do
 
   import Verna.PlantingFixtures
 
-  alias Verna.Planting.Plan
-
   @create_attrs %{
     name: "some name",
-    contents: %{},
-    cached_score: 42
+    beds: []
   }
-  @update_attrs %{
-    name: "some updated name",
-    contents: %{},
-    cached_score: 43
-  }
-  @invalid_attrs %{name: nil, contents: nil, cached_score: nil}
+  @invalid_attrs %{name: nil, beds: nil}
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
-  describe "index" do
-    test "lists all plans", %{conn: conn} do
-      conn = get(conn, ~p"/api/plans")
-      assert json_response(conn, 200)["data"] == []
-    end
-  end
-
   describe "create plan" do
     test "renders plan when data is valid", %{conn: conn} do
-      conn = post(conn, ~p"/api/plans", plan: @create_attrs)
+      garden = garden_fixture()
+
+      conn = post(conn, ~p"/api/plans/create", Map.put(@create_attrs, :garden_id, garden.id))
       assert %{"id" => id} = json_response(conn, 201)["data"]
-
-      conn = get(conn, ~p"/api/plans/#{id}")
-
-      assert %{
-               "id" => ^id,
-               "cached_score" => 42,
-               "contents" => %{},
-               "name" => "some name"
-             } = json_response(conn, 200)["data"]
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, ~p"/api/plans", plan: @invalid_attrs)
+      conn = post(conn, ~p"/api/plans/create", @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
 
-  describe "update plan" do
+  describe "score plan" do
     setup [:create_plan]
 
-    test "renders plan when data is valid", %{conn: conn, plan: %Plan{id: id} = plan} do
-      conn = put(conn, ~p"/api/plans/#{plan}", plan: @update_attrs)
-      assert %{"id" => ^id} = json_response(conn, 200)["data"]
-
-      conn = get(conn, ~p"/api/plans/#{id}")
+    test "scores chosen plan", %{conn: conn, plan: plan} do
+      conn = get(conn, ~p"/api/plans/score/#{plan.name}")
+      assert response(conn, 200)
 
       assert %{
-               "id" => ^id,
-               "cached_score" => 43,
-               "contents" => %{},
-               "name" => "some updated name"
-             } = json_response(conn, 200)["data"]
-    end
-
-    test "renders errors when data is invalid", %{conn: conn, plan: plan} do
-      conn = put(conn, ~p"/api/plans/#{plan}", plan: @invalid_attrs)
-      assert json_response(conn, 422)["errors"] != %{}
-    end
-  end
-
-  describe "delete plan" do
-    setup [:create_plan]
-
-    test "deletes chosen plan", %{conn: conn, plan: plan} do
-      conn = delete(conn, ~p"/api/plans/#{plan}")
-      assert response(conn, 204)
-
-      assert_error_sent 404, fn ->
-        get(conn, ~p"/api/plans/#{plan}")
-      end
+               "score" => 9.5
+             } = json_response(conn, 200)
     end
   end
 
   defp create_plan(_) do
-    plan = plan_fixture()
+    garden = garden_fixture()
+    bed_fixture(garden_id: garden.id)
+    bed_fixture(garden_id: garden.id)
+
+    plan =
+      plan_fixture(
+        garden_id: garden.id,
+        beds: %{
+          "beds" => [
+            [
+              %{
+                "plant" => "tomato",
+                "area" => 250
+              },
+              %{
+                "plant" => "onion",
+                "area" => 900
+              }
+            ],
+            [
+              %{
+                "plant" => "carrot",
+                "area" => 1000
+              },
+              %{
+                "plant" => "pea",
+                "area" => 1000
+              }
+            ]
+          ]
+        }
+      )
+
     %{plan: plan}
   end
 end

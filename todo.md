@@ -44,7 +44,6 @@ Need to define a json schema for the request. I can use the same code/pattern fr
 Pipeline of composable functions seems like the best way to implement this while also making it easy to extend.
 
 ## 6 - TODO
-- Multiple plots
 - Updating background knowledge data without restarting app
 - Telemetry
 - Logging

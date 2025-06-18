@@ -39,12 +39,14 @@ defmodule Verna.PlantingFixtures do
   Generate a plan.
   """
   def plan_fixture(attrs \\ %{}) do
+    garden = garden_fixture()
+
     {:ok, plan} =
       attrs
       |> Enum.into(%{
-        cached_score: 42,
-        contents: %{},
-        name: "some name"
+        beds: %{},
+        name: "some name",
+        garden_id: garden.id
       })
       |> Verna.Planting.create_plan()
 

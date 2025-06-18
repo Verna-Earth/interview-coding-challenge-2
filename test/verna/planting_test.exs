@@ -23,24 +23,14 @@ defmodule Verna.PlantingTest do
     test "create_garden/1 with valid data creates a garden" do
       valid_attrs = %{}
 
-      assert {:ok, %Garden{} = garden} = Planting.create_garden(valid_attrs)
-    end
-
-    test "create_garden/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Planting.create_garden(@invalid_attrs)
+      assert {:ok, %Garden{}} = Planting.create_garden(valid_attrs)
     end
 
     test "update_garden/2 with valid data updates the garden" do
       garden = garden_fixture()
       update_attrs = %{}
 
-      assert {:ok, %Garden{} = garden} = Planting.update_garden(garden, update_attrs)
-    end
-
-    test "update_garden/2 with invalid data returns error changeset" do
-      garden = garden_fixture()
-      assert {:error, %Ecto.Changeset{}} = Planting.update_garden(garden, @invalid_attrs)
-      assert garden == Planting.get_garden!(garden.id)
+      assert {:ok, %Garden{}} = Planting.update_garden(garden, update_attrs)
     end
 
     test "delete_garden/1 deletes the garden" do
@@ -139,7 +129,7 @@ defmodule Verna.PlantingTest do
 
     import Verna.PlantingFixtures
 
-    @invalid_attrs %{name: nil, contents: nil, cached_score: nil}
+    @invalid_attrs %{name: nil, beds: nil}
 
     test "list_plans/0 returns all plans" do
       plan = plan_fixture()
@@ -152,12 +142,11 @@ defmodule Verna.PlantingTest do
     end
 
     test "create_plan/1 with valid data creates a plan" do
-      valid_attrs = %{name: "some name", contents: %{}, cached_score: 42}
+      garden = garden_fixture()
+      valid_attrs = %{name: "some name", beds: %{}, garden_id: garden.id}
 
       assert {:ok, %Plan{} = plan} = Planting.create_plan(valid_attrs)
       assert plan.name == "some name"
-      assert plan.contents == %{}
-      assert plan.cached_score == 42
     end
 
     test "create_plan/1 with invalid data returns error changeset" do
@@ -166,12 +155,10 @@ defmodule Verna.PlantingTest do
 
     test "update_plan/2 with valid data updates the plan" do
       plan = plan_fixture()
-      update_attrs = %{name: "some updated name", contents: %{}, cached_score: 43}
+      update_attrs = %{name: "some updated name", beds: %{}}
 
       assert {:ok, %Plan{} = plan} = Planting.update_plan(plan, update_attrs)
       assert plan.name == "some updated name"
-      assert plan.contents == %{}
-      assert plan.cached_score == 43
     end
 
     test "update_plan/2 with invalid data returns error changeset" do
