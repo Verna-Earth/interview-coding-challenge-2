@@ -1,4 +1,4 @@
-defmodule Verna.Caches.KnowledgeCache do
+defmodule Verna.Caches do
   @moduledoc """
   Cache for global runtime variables
   """
@@ -12,7 +12,8 @@ defmodule Verna.Caches.KnowledgeCache do
   @impl true
   def init(:ok) do
     children = [
-      add_cache(:background_knowledge)
+      add_cache(:background_knowledge),
+      add_cache(:protocol_schemas)
     ]
 
     Supervisor.init(children, strategy: :one_for_all)

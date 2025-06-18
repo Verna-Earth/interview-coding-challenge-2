@@ -1,0 +1,30 @@
+meta {
+  name: Create (success)
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:4000/api/create_garden
+  body: json
+  auth: inherit
+}
+
+body:json {
+  [
+    {
+      "x": 0,
+      "y": 0,
+      "width": 250,
+      "lendgth": 180,
+      "soil_type": "chalk"
+    },
+    {
+      "x": 250,
+      "y": 300,
+      "width": 300,
+      "lendgth": 300,
+      "soil_type": "loam"
+    }
+  ]
+}

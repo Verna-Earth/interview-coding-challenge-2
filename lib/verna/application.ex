@@ -18,7 +18,7 @@ defmodule Verna.Application do
       # {Verna.Worker, arg},
       # Start to serve requests, typically the last entry
       VernaWeb.Endpoint,
-      Verna.Caches.KnowledgeCache
+      Verna.Caches
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -32,6 +32,7 @@ defmodule Verna.Application do
   end
 
   defp startup() do
+    Verna.JSONSchemas.load()
     Verna.Knowledge.load_background_knowledge()
   end
 
