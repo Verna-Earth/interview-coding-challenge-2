@@ -1,0 +1,32 @@
+meta {
+  name: Create (bad schema)
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:4000/api/gardens/create
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "beds": [
+      {
+        "x": 100,
+        "y": 100,
+        "width": 250,
+        "not-a-field-length": 180,
+        "soil_type": "chalk"
+      },
+      {
+        "x": 250,
+        "y": 300,
+        "width": 300,
+        "not-a-field-length": 300,
+        "soil_type": "loam"
+      }
+    ]
+  }
+}

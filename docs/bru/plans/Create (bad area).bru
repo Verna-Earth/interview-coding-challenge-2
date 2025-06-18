@@ -1,0 +1,40 @@
+meta {
+  name: Create (bad area)
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:4000/api/plans/create
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "plan1",
+    "garden_id": 1,
+    "beds": [
+      [
+        {
+          "plant": "tomato",
+          "area": 250000000000
+        },
+        {
+          "plant": "onion",
+          "area": 900
+        }
+      ],
+      [
+        {
+          "plant": "carrot",
+          "area": 1000
+        },
+        {
+          "plant": "pea",
+          "area": 1000
+        }
+      ]
+    ]
+  }
+}

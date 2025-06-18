@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "create_garden_request.json",
+  "title": "Create garden request",
+  "description": "A request for the creation of a new garden layout",
+  "type": "object",
+  "properties": {
+    "beds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "integer"
+          },
+          "y": {
+            "type": "integer"
+          },
+          "width": {
+            "type": "integer"
+          },
+          "length": {
+            "type": "integer"
+          },
+          "soil_type": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "x",
+          "y",
+          "width",
+          "length",
+          "soil_type"
+        ]
+      }
+    }
+  },
+  "required": [
+    "beds"
+  ]
+}
