@@ -58,7 +58,7 @@ defmodule VernaWeb.GardenController do
           # ]
 
           # Set to true to force collisions, set to false to prevent them
-          true
+          false
         end)
       end)
 

@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "create_plan_request.json",
+  "title": "Create plan request",
+  "description": "A request for the creation of a new plan layout",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "garden_id": {
+      "type": "integer"
+    },
+    "beds": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "plant": {
+              "type": "string"
+            },
+            "area": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "plant",
+            "area"
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "name",
+    "garden_id",
+    "beds"
+  ]
+}

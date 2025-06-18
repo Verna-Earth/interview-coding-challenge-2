@@ -24,6 +24,7 @@ defmodule VernaWeb.Router do
     pipe_through :api
 
     post "/gardens/create", GardenController, :create
+    post "/plans/create", PlanController, :create
   end
 
   # Other scopes may use custom stacks.

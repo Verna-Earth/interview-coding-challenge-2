@@ -8,7 +8,8 @@ defmodule Verna.Repo.Migrations.CreateBeds do
       add :width, :integer
       add :length, :integer
       add :soil_type, :string
-      add :garden_id, :integer
+
+      add(:garden_id, references(:gardens, on_delete: :nothing))
 
       timestamps(type: :utc_datetime)
     end

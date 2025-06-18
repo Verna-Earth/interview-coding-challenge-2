@@ -133,4 +133,62 @@ defmodule Verna.PlantingTest do
       assert %Ecto.Changeset{} = Planting.change_bed(bed)
     end
   end
+
+  describe "plans" do
+    alias Verna.Planting.Plan
+
+    import Verna.PlantingFixtures
+
+    @invalid_attrs %{name: nil, contents: nil, cached_score: nil}
+
+    test "list_plans/0 returns all plans" do
+      plan = plan_fixture()
+      assert Planting.list_plans() == [plan]
+    end
+
+    test "get_plan!/1 returns the plan with given id" do
+      plan = plan_fixture()
+      assert Planting.get_plan!(plan.id) == plan
+    end
+
+    test "create_plan/1 with valid data creates a plan" do
+      valid_attrs = %{name: "some name", contents: %{}, cached_score: 42}
+
+      assert {:ok, %Plan{} = plan} = Planting.create_plan(valid_attrs)
+      assert plan.name == "some name"
+      assert plan.contents == %{}
+      assert plan.cached_score == 42
+    end
+
+    test "create_plan/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Planting.create_plan(@invalid_attrs)
+    end
+
+    test "update_plan/2 with valid data updates the plan" do
+      plan = plan_fixture()
+      update_attrs = %{name: "some updated name", contents: %{}, cached_score: 43}
+
+      assert {:ok, %Plan{} = plan} = Planting.update_plan(plan, update_attrs)
+      assert plan.name == "some updated name"
+      assert plan.contents == %{}
+      assert plan.cached_score == 43
+    end
+
+    test "update_plan/2 with invalid data returns error changeset" do
+      plan = plan_fixture()
+      assert {:error, %Ecto.Changeset{}} = Planting.update_plan(plan, @invalid_attrs)
+      assert plan == Planting.get_plan!(plan.id)
+    end
+
+    test "delete_plan/1 deletes the plan" do
+      plan = plan_fixture()
+      assert {:ok, %Plan{}} = Planting.delete_plan(plan)
+      assert_raise Ecto.NoResultsError, fn -> Planting.get_plan!(plan.id) end
+    end
+
+    test "change_plan/1 returns a plan changeset" do
+      plan = plan_fixture()
+      assert %Ecto.Changeset{} = Planting.change_plan(plan)
+    end
+  end
 end

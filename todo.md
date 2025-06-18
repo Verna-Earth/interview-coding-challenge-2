@@ -38,7 +38,7 @@ Thinking ETS cache (via Cachex) to store the data. Reference at stage 6 how we'd
 Need to define a json schema for the request. I can use the same code/pattern from my Angen project.
 
 ## 4 - Creating a planting plan
-`mix phx.gen.json Planting Plan plans name:string contents:jsonb cached_score:integer`
+`mix phx.gen.json Planting Plan plans name:string contents:map`
 
 ## 5 - Getting the score of a plan
 Pipeline of composable functions seems like the best way to implement this while also making it easy to extend.
@@ -54,3 +54,4 @@ Pipeline of composable functions seems like the best way to implement this while
 - More tests, where?
 - More errors handled with beds, extreme integer values cause a Postgrex exception which isn't caught
 - Handle collisions correctly
+- Better identifiers for beds, choice driven by customer requirements rather than dev preference where possible?
