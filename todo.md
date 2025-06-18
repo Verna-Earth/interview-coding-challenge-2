@@ -55,3 +55,4 @@ Pipeline of composable functions seems like the best way to implement this while
 - More errors handled with beds, extreme integer values cause a Postgrex exception which isn't caught
 - Handle collisions correctly
 - Better identifiers for beds, choice driven by customer requirements rather than dev preference where possible?
+- Unique plan names?

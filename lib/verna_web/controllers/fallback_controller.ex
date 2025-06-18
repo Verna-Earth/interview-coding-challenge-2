@@ -34,6 +34,13 @@ defmodule VernaWeb.FallbackController do
     conn
     |> put_status(:unprocessable_entity)
     |> put_view(json: VernaWeb.ErrorJSON)
-    |> render(:"500-detail", %{errors: "Overlap error"})
+    |> render(:"500-detail", %{errors: "Bed overlap error"})
+  end
+
+  def call(conn, {:bed_area_error, msg}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> put_view(json: VernaWeb.ErrorJSON)
+    |> render(:"500-detail", %{errors: msg})
   end
 end

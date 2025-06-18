@@ -1,7 +1,7 @@
 meta {
-  name: Create (bad schema)
+  name: Create (bad area)
   type: http
-  seq: 2
+  seq: 3
 }
 
 post {
@@ -12,26 +12,26 @@ post {
 
 body:json {
   {
-    "not-name": "plan1",
+    "name": "plan1",
     "garden_id": 1,
     "beds": [
       [
         {
-          "plant": "spinach",
-          "area": 250
+          "plant": "tomato",
+          "area": 250000000000
         },
         {
-          "plant": "tomato",
+          "plant": "onion",
           "area": 900
         }
       ],
       [
         {
-          "plant": "garlic",
+          "plant": "carrot",
           "area": 1000
         },
         {
-          "plant": "onion",
+          "plant": "pea",
           "area": 1000
         }
       ]

@@ -17,9 +17,8 @@ defmodule VernaWeb.PlanController do
   end
 
   def create(conn, plan_data) do
-    # TODO: ensure the area is less than the area of the bed
-
     with :ok <- validate_schema(plan_data),
+         :ok <- validate_area(plan_data),
          {:ok, plan} <- do_create(plan_data) do
       conn
       |> put_status(:created)
@@ -27,10 +26,35 @@ defmodule VernaWeb.PlanController do
     end
   end
 
-  defp validate_schema(garden_data) do
-    case JSONSchemas.validate("create_plan_request.json", garden_data) do
+  defp validate_schema(plan_data) do
+    case JSONSchemas.validate("create_plan_request.json", plan_data) do
       :ok -> :ok
       {:error, errors} -> {:validation_error, errors}
+    end
+  end
+
+  defp validate_area(plan_data) do
+    garden = Planting.get_garden_and_beds!(plan_data["garden_id"])
+
+    within_size? =
+      plan_data["beds"]
+      |> Enum.zip(garden.beds)
+      |> Enum.map(fn {planned_bed, garden_bed} ->
+        planned_area =
+          planned_bed
+          |> Enum.map(fn %{"area" => area} -> area end)
+          |> Enum.sum()
+
+        garden_bed_area = garden_bed.width * garden_bed.length
+
+        planned_area <= garden_bed_area
+      end)
+      |> Enum.all?()
+
+    if within_size? do
+      :ok
+    else
+      {:bed_area_error, "One or more of the beds are too small for the area being planted in it"}
     end
   end
 
